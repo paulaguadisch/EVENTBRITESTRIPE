@@ -1,21 +1,14 @@
-<h1> Nos évènements </h1>
+<h1> Évènement : <%= @event.name %></h1>
 
-<% @events.each do |event| %>
+<p> <%= @event.description %></p>
+<p> <%= @event.date %></p>
+<p> <%= @event.place %></p>
 
-<p>Nom de l'évènement : </p>
-<%= event.name %>
-
-<p>Description de l'événement : </p>
-<%= event.description %>
-
-<p>Date de l'événement : </p>
-<%= event.date %>
-
-<p>Lieu de l'événement : </p>
-<%= event.place %>
-
- <br>
- -------------------------------
-  <br>
-  <br>
-<%end%>
+<p>
+	<% if @event.user_attendees.include? current_user %>
+     <%= link_to "Vous participez déjà l'évènement", root_path, class: "btn btn-outline-primary"%> 
+    <% else @event.user_attendees << current_user %>
+    <%= link_to "Participer à l'évènement", subscribe_path, method: :post, class: "btn btn-outline-primary"%> 
+	
+	<% end %>
+</p>
