@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous"><script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
     <title>Eventbrite2</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -10,6 +13,21 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+      <h5 class="my-0 mr-md-auto font-weight-normal">EVENTBRITE MAGGEL</h5>
+        <nav class="my-2 my-md-0 mr-md-3">
+          <a class="p-2 text-dark" href="/">Index</a>
+        </nav>
+      <% if user_signed_in? %>
+       <span class="btn btn-outline-primary">
+                 <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+              </span>
+    <% else %>
+<a class="btn btn-outline-primary" href="<%= new_user_session_path %>">Sign in</a>
+<a class="btn btn-outline-primary" href="<%= new_user_registration_path %> ">Sign up</a>
+    <% end %>
+
+    </div class = "container" style="padding-top: 5rem;">
+  <%= yield %>
   </body>
 </html>

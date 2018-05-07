@@ -1,0 +1,20 @@
+<h1> Si tu veux créer un event !</h1>
+
+<p> <%= link_to "Clique ici", new_event_path %> </p>
+
+<h1> Voici la liste des événements que tu as déjà créés </h1>
+<% y = 1 %>
+<% @events.each do |event| %>
+<p>Événement numéro <%= y %> : </p>
+<p>Description de l'événement : </p>
+<%= event.description %>
+<p>Date de l'événement : </p>
+<%= event.date %>
+<p>Lieu de l'événement : </p>
+<%= event.place %>
+<% y = y+1 %>
+ <br>
+ -------------------------------
+  <br>
+  <br>
+<%end%>
