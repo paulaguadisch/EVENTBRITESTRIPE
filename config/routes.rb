@@ -9,6 +9,5 @@ Rails.application.routes.draw do
   resources :users
 
   post '/events/:id/subscribe', to: 'events#subscribe', as: 'subscribe'
-  get '/events/:id/subscribe', to: 'events#subscribe', as: 'subscribe_stripe'
 
 end

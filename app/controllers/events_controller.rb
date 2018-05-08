@@ -27,7 +27,9 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     if 
       @event.user_attendees.include? current_user
+      flash[:error] = "Vous participez déjà à l'évènement !"
       redirect_to @event
+      return
     end
 
   @amount = @event.price
