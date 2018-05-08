@@ -1,14 +1,33 @@
-<h1> Évènement : <%= @event.name %></h1>
+<h1 class="text-center"> Évènement : <%= @event.name %></h1>
 
-<p> <%= @event.description %></p>
-<p> <%= @event.date %></p>
-<p> <%= @event.place %></p>
+<div class="text-center">
+	<p> <%= @event.description %></p>
+	<p> <%= @event.date %></p>
+	<p> <%= @event.place %></p>
+</div>
 
-<p>
-	<% if @event.user_attendees.include? current_user %>
-     <%= link_to "Vous participez déjà l'évènement", root_path, class: "btn btn-outline-primary"%> 
-    <% else @event.user_attendees << current_user %>
-    <%= link_to "Participer à l'évènement", subscribe_path, method: :post, class: "btn btn-outline-primary"%> 
-	
-	<% end %>
-</p>
+
+<div class="text-center">
+
+<%= form_tag subscribe_stripe_path do %>
+  <article>
+    <% if flash[:error].present? %>
+      <div id="error_explanation">
+        <p><%= flash[:error] %></p>
+      </div>
+    <% end %>
+    <label class="amount">
+      <span>Amount: €5.00</span>
+    </label>
+  </article>
+
+  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-description="Paiement pour cet event"
+          data-amount="500"
+          data-currency="our"
+          data-locale="auto"></script>
+<% end %>
+
+</div>
+

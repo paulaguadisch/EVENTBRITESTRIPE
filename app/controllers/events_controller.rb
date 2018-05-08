@@ -27,14 +27,31 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     if 
       @event.user_attendees.include? current_user
-      flash[:error] = "Vous participez déjà à l'événement !" 
-      redirect_to @event
-    else
-      @event.user_attendees << current_user
-      flash[:success] = "Vous participez à l'événement !"
       redirect_to @event
     end
+
+  @amount = @event.price
+
+  customer = Stripe::Customer.create(
+    :email => params[:stripeEmail],
+    :source  => params[:stripeToken]
+  )
+
+  charge = Stripe::Charge.create(
+    :customer    => customer.id,
+    :amount      => @amount,
+    :description => 'Paiement de #{@user.username}',
+    :currency    => 'eur'
+  )
+
+  @event.user_attendees << current_user
+  redirect_to @event
+
+  rescue Stripe::CardError => e
+    flash[:error] = e.message
+    redirect_to @event
   end
+
 
 	def event_params
 		params.require(:event).permit(:name, :description, :date, :place)

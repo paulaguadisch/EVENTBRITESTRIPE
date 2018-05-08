@@ -1,23 +1,25 @@
-<h1> Nos évènements </h1>
+<h1 class="text-center"> Nos évènements </h1>
 
-<% @events.each do |event| %>
+<div class="text-center">
+	<% @events.each do |event| %>
 
-<p>Nom de l'évènement : </p>
-<%= event.name %>
+	<p>Nom de l'évènement : </p>
+	<%= event.name %>
 
-<p>Description de l'événement : </p>
-<%= event.description %>
+	<p>Description de l'événement : </p>
+	<%= event.description %>
 
-<p>Date de l'événement : </p>
-<%= event.date %>
+	<p>Date de l'événement : </p>
+	<%= event.date %>
 
-<p>Lieu de l'événement : </p>
-<%= event.place %>
+	<p>Lieu de l'événement : </p>
+	<%= event.place %>
 
-<p><%= link_to "Afficher la page de l'évènement", event, class: "btn btn-outline-primary"%> 
-</p>
- <br>
- -------------------------------
-  <br>
-  <br>
-<%end%>
+	<p><%= link_to "Afficher la page de l'évènement", event, class: "btn btn-outline-primary"%> 
+	</p>
+	 <br>
+	 -------------------------------
+	  <br>
+	  <br>
+	<%end%>
+</div>
